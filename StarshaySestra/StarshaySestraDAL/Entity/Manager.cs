@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace StarshaySestra.StarshaySestraDAL.Entity
 {
-   public class Manager:BaseEntity
+   public class Manager: BaseEntity
     {
+     
       public string ManagerNickname { get; set; }
         public int ManagerId { get; set; }  
     }

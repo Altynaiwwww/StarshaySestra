@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace StarshaySestra.StarshaySestraDAL
 {
-    public partial class DialogMembers
+    public class DialogMembers
     {
-        [Key]
-        public int IdThread { get; set; }
-        public long IdTc { get; set; }
-        public long IdDriver { get; set; }
+        public int UserId { get; set; }
+        public int ManagerId { get; set; }
     }
 }
+
+  

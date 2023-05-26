@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using StarshaySestra.StarshaySestraDAL.Entity;
 
 namespace StarshaySestra.StarshaySestraDAL
@@ -15,16 +15,22 @@ namespace StarshaySestra.StarshaySestraDAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(
-                "Host=localhost;" +
-                "Port=5433;" +
-                "Database=Users;" +
-                "Username=postgres;" +
-                "Password=zaqwsxzaq");
+            optionsBuilder
+                .UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=EFMiscellanous.ConnectionResiliency;Trusted_Connection=True",
+                    options => options.EnableRetryOnFailure());
         }
-       
-        
 
-    
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationContext>(
+                options => options.UseSqlServer(
+                    "<connection string>",
+                    providerOptions => providerOptions.EnableRetryOnFailure()));
+        }
+
+
+
+
     }
 }
