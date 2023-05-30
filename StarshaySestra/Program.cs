@@ -9,6 +9,9 @@ using StarshaySestra.StarshaySestraDAL.Entity;
 using Telegram.Bot.Types;
 using User = Telegram.Bot.Types.User;
 using Telegram.Bots.Types;
+using Telegram.Bot.Types.ReplyMarkups;
+using InlineKeyboardMarkup = Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Bot
 {
@@ -20,9 +23,7 @@ namespace Bot
         {
           MainMenu,
           Sos,
-          Suicide,
           Sex,
-          WhoAmI,
           Period,
           SocialNetworks,
           DadAndMom
@@ -37,49 +38,102 @@ namespace Bot
                 var canceltoken = token.Token;
                 var reOpt = new ReceiverOptions { AllowedUpdates = { } };
                 
-                await botClient.ReceiveAsync(OnMessage, HandleErrorAsync, reOpt,canceltoken);
+                
+                await botClient.ReceiveAsync(OnMessage, ErrorAsync, reOpt,canceltoken);
 
         }
 
-
-        private BotState curentState = BotState.MainMenu;
-        private static async Task OnMessage(ITelegramBotClient botClient,Update update,
-          CancellationToken cancellationToken )
+        private static Task ErrorAsync(ITelegramBotClient arg1, Exception arg2, CancellationToken arg3)
         {
-            if (update.Type ==Telegram.Bot.Types.Enums.UpdateType.Message)
+            throw new NotImplementedException();
+        }
+
+
+
+
+        const BotState curentState = BotState.MainMenu;
+        private static async Task OnMessage(ITelegramBotClient botClient, Update update,
+          CancellationToken cancellationToken)
+        {
+            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
                 var message = update.Message;
                 var user = update.ToString();
-                if (message.Text.ToLower() == "/start") 
+                if (message.Text.ToLower() == "/start")
                 {
-                    await botClient.SendTextMessageAsync(update.Message.Chat.Id, "Дисклеймер");
-                   
-                   // await botClient.HandleUpdateAsync(update, cancellationToken);
+                    
+                    InlineKeyboardMarkup keyboardMarkupStart = new InlineKeyboardMarkup
+                        (InlineKeyboardButton.WithCallbackData(text: "Согласие", callbackData: "soglasen"));
+
+                    await botClient.SendTextMessageAsync(update.Message.Chat.Id, "Дисклеймер, данный бот разработан любящими сестрами для своих сестренок," +
+                        " ввиде не принужденного разговора о этапах взросление и понятий своего тела ",
+                        replyMarkup: keyboardMarkupStart, cancellationToken: cancellationToken);
 
                 }
 
-                await botClient.HandleUpdateAsync(update, cancellationToken);
-
-
-                //string userNickname = message.From.Username;
-                //string greeting = $"Hiii {userNickname}";
-
-                //  await botClient.SendTextMessageAsync(message.Chat.Id);
-                // await botClient.HandleUpdateAsync(update, cancellationToken);
-
+            }
+            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.CallbackQuery)
+            {
+                await HandleCallbackQuery(update, (TelegramBotClient)botClient);
             }
 
+           
+            static async Task HandleCallbackQuery(Update update, TelegramBotClient botClient)
+            {
+                var callbackQuery = update.CallbackQuery;
+                
 
-        }
+               
+                
 
-       
-        public static async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception,
-            CancellationToken cancellationToken)
-        {
-            
-            Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(exception));
+
+                     switch (callbackQuery.Data)
+                     {
+                           case "soglasen":
+                        var mainMenu = new ReplyKeyboardMarkup(
+                            new[]
+                            {
+                                           new[]
+                                           {
+                                              new KeyboardButton("SOS"),
+                                              new KeyboardButton("Отношения с родителями "),
+                                              new KeyboardButton("Соц.сети и массовое информация ")
+                                           },
+                                           new[]
+                                           {
+                                               new KeyboardButton("Секс"),
+                                               new KeyboardButton("Месячные"),
+                                               new KeyboardButton("Как распознать арбузера?")
+                                           }
+                            }
+                              );
+
+                        await botClient.SendTextMessageAsync(
+                      chatId: callbackQuery.Message.Chat.Id,
+                      text: "Выберите тему",
+                      replyMarkup: mainMenu,
+                      parseMode: Telegram.Bot.Types.Enums.ParseMode.Html
+                      );
+                        break;
+                       default:
+
+                        break;
+                     }
+
+                //if () 
+                //{
+                
+                
+                //}
+
+            }
         }
 
     }
+
+
+  
+
 }
+
 
