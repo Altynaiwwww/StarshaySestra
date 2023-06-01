@@ -18,6 +18,7 @@ namespace Bot
     public class Program
     {
        static TelegramBotClient botClient = new TelegramBotClient("6239769324:AAE8BbkP2v0d4dyNbx45UEkvBOuBmNdSs7g");
+       
 
         private enum BotState 
         {
@@ -49,15 +50,18 @@ namespace Bot
         }
 
 
-
+        
 
         const BotState curentState = BotState.MainMenu;
+
+      
+
         private static async Task OnMessage(ITelegramBotClient botClient, Update update,
           CancellationToken cancellationToken)
         {
             if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
-                var message = update.Message;
+                var  message = update.Message;
                 var user = update.ToString();
                 if (message.Text.ToLower() == "/start")
                 {
@@ -80,16 +84,16 @@ namespace Bot
            
             static async Task HandleCallbackQuery(Update update, TelegramBotClient botClient)
             {
-                var callbackQuery = update.CallbackQuery;
-                
-
-               
-                
+                var callbackQuery1 = update.CallbackQuery;
 
 
-                     switch (callbackQuery.Data)
-                     {
-                           case "soglasen":
+
+
+
+
+                switch (callbackQuery1.Data)
+                {
+                    case "soglasen":
                         var mainMenu = new ReplyKeyboardMarkup(
                             new[]
                             {
@@ -102,38 +106,156 @@ namespace Bot
                                            new[]
                                            {
                                                new KeyboardButton("Секс"),
-                                               new KeyboardButton("Месячные"),
                                                new KeyboardButton("Как распознать арбузера?")
                                            }
                             }
                               );
 
                         await botClient.SendTextMessageAsync(
-                      chatId: callbackQuery.Message.Chat.Id,
+                      chatId: callbackQuery1.Message.Chat.Id,
                       text: "Выберите тему",
                       replyMarkup: mainMenu,
                       parseMode: Telegram.Bot.Types.Enums.ParseMode.Html
                       );
                         break;
-                       default:
+                    default:
 
                         break;
-                     }
+                }
 
-                //if () 
-                //{
-                
-                
-                //}
+
+
 
             }
+
+
+            // ReplyKeyboardMarkup keyboardButtonSOS = new ReplyKeyboardMarkup(KeyboardButton button);
+
+
+
+            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
+            {
+                var message = update.Message;
+                var callbackData = update.CallbackQuery;
+
+
+                switch (message.Text)
+                {
+                    case "SOS" :
+                        var SOS = new ReplyKeyboardMarkup(new KeyboardButton[][]
+                        {
+                          new KeyboardButton[]
+                          {
+                           new KeyboardButton("Психолог"),
+                          },
+                          new KeyboardButton[]
+                          {
+                           new KeyboardButton("Адвокат"),
+                           new KeyboardButton("Юрист"),
+
+                          },
+                          new KeyboardButton[]
+                          {
+                            new KeyboardButton("Гинеколог"),
+                            new KeyboardButton("Шелтер"),
+                            new KeyboardButton("Терапевт")
+                          }
+
+                        });
+
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "SOS",
+                            replyMarkup: SOS);
+                        break;
+
+
+                    case "Отношения с родителями":
+                        var parents = new ReplyKeyboardMarkup(new KeyboardButton[][] 
+                        {
+                            new KeyboardButton[]
+                            {
+                             new KeyboardButton("как сепарироватся"),
+                            },
+                            new KeyboardButton[]
+                            {
+                             new KeyboardButton("родители и развод"),
+
+                            }
+
+                        });
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "родители",
+                          replyMarkup: parents);
+                        break;
+
+
+                    case "Соц.сети и массовое информация ":
+                        var socials = new ReplyKeyboardMarkup(new KeyboardButton[][] 
+                        {
+                            new KeyboardButton[]
+                            {
+                             new KeyboardButton("безопасность"),
+                             new KeyboardButton("инста как фильтр")
+                            }
+                        });
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "инста",
+                         replyMarkup: socials);
+                        break;
+
+
+                    case "Секс":
+                        var sex = new ReplyKeyboardMarkup(new KeyboardButton[][]
+                        {
+                           new KeyboardButton[]
+                           {
+                             new KeyboardButton("методы защиты")
+                           },
+                           new KeyboardButton[]
+                           {
+                             new KeyboardButton("половое образование")
+                           },
+                           new KeyboardButton[]
+                           {
+                             new KeyboardButton("месячные")
+                           }
+
+
+                        });
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "vtdtyfuiop",
+                       replyMarkup: sex);
+                        break;
+
+
+                    case "Как распознать арбузера?":
+                        var abuse = new ReplyKeyboardMarkup(new KeyboardButton[][] 
+                        {
+                            new KeyboardButton[]
+                            {
+                                new KeyboardButton("виды отношений"),
+                                new KeyboardButton("душевное состояние")
+                            }
+
+                        });
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "fhngmv",
+                      replyMarkup: abuse);
+                        break;
+
+
+
+                }
+
+
+
+            }
+
+
+
+
         }
 
     }
-
+}
 
   
 
-}
+
 
 
