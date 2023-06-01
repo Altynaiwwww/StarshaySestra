@@ -185,15 +185,16 @@ namespace Bot
                         break;
 
 
-                    case "Соц.сети и массовое информация ":
+                    case "Соц.сети и массовое информация":
                         var socials = new ReplyKeyboardMarkup(new KeyboardButton[][]
                         {
                             new KeyboardButton[]
                             {
-                             new KeyboardButton("безопасность"),
-                             new KeyboardButton("инста как фильтр"),
-                             new KeyboardButton("Назад")
-
+                             new KeyboardButton("цифровая гигиена"),
+                            },
+                            new KeyboardButton []
+                            {
+                              new KeyboardButton("инста как фильтр")
                             }
                         });
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "инста",
