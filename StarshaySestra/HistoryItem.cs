@@ -1,6 +1,6 @@
 ﻿
 using Telegram.Bot.Types.ReplyMarkups;
-
+using Update = Telegram.Bot.Types.Update;
 
 namespace StarshaySestra
 {
@@ -27,11 +27,27 @@ namespace StarshaySestra
             throw new NotImplementedException();
         }
 
-        public void RemoveLastButton(HistoryItem histories)
+        public void RemoveLastButton(HistoryItem histories,Update update)
         {
             if (userActions.Count > 0)
             {
-                userActions.RemoveAt(userActions.Count - 1);
+               
+
+                if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message) 
+                {
+                    var message = update.Message;
+                    var callbackData = update.CallbackQuery;
+
+                    //switch (message.А)
+                    //{
+                    //    case "Назад":
+                    //        userActions.RemoveAt(userActions.Count - 1);
+
+
+                    //        break;
+                    //}
+                }
+
                 
             }
         }

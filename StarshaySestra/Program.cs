@@ -4,7 +4,6 @@ using Message = Telegram.Bot.Types.Message;
 using Update = Telegram.Bot.Types.Update;
 
 using System.Security.Cryptography.X509Certificates;
-using StarshaySestra.Command;
 using StarshaySestra.StarshaySestraDAL.Entity;
 using Telegram.Bot.Types;
 using User = Telegram.Bot.Types.User;
@@ -45,7 +44,7 @@ namespace Bot
 
         }
 
-        private static Task ErrorAsync(ITelegramBotClient arg1, Exception arg2, CancellationToken arg3)
+        private static Task ErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken canceltoken)
         {
             throw new NotImplementedException();
         }
@@ -82,6 +81,13 @@ namespace Bot
                 await HandleCallbackQuery(update, (TelegramBotClient)botClient);
             }
 
+
+            //if (update.Type == Telegram.Bot.Types.Enums.UpdateType.MessageEventArgs xuyna) 
+            //{
+            //    await botClient.DeleteMessageAsync(
+            //            chatId: e.Message.Chat.Id,
+            //            messageId: e.Message.MessageId);
+            //}
 
             static async Task HandleCallbackQuery(Update update, TelegramBotClient botClient)
             {
@@ -146,21 +152,32 @@ namespace Bot
                           new KeyboardButton[]
                           {
                            new KeyboardButton("Адвокат"),
-                           new KeyboardButton("Юрист"),
-
                           },
                           new KeyboardButton[]
                           {
-                            new KeyboardButton("Гинеколог"),
+                          new KeyboardButton("Юрист"),
+                          },
+                          new KeyboardButton[]
+                          {
+                            new KeyboardButton("Гинеколог")
+                          },
+                          new KeyboardButton[]
+                          {
                             new KeyboardButton("Шелтер"),
-                            new KeyboardButton("Терапевт"),
-                            new KeyboardButton("Назад")
-
+                          },
+                          new KeyboardButton[]
+                          {
+                            new KeyboardButton("Терапевт")
+                          },
+                          new KeyboardButton[]
+                          {
+                             new KeyboardButton("Назад")
                           }
+
 
                         });
 
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "SOS",
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                             replyMarkup: SOS);
                         break;
 
@@ -171,6 +188,8 @@ namespace Bot
                             new KeyboardButton[]
                             {
                              new KeyboardButton("как сепарироватся"),
+                        
+
                             },
                             new KeyboardButton[]
                             {
@@ -180,7 +199,7 @@ namespace Bot
                             }
 
                         });
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "родители",
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                           replyMarkup: parents);
                         break;
 
@@ -191,13 +210,17 @@ namespace Bot
                             new KeyboardButton[]
                             {
                              new KeyboardButton("цифровая гигиена"),
+                         
+
                             },
                             new KeyboardButton []
                             {
-                              new KeyboardButton("инста как фильтр")
+                              new KeyboardButton("инста как фильтр"),
+                              new KeyboardButton("Назад")
+
                             }
                         });
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "инста",
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                          replyMarkup: socials);
                         break;
 
@@ -211,7 +234,9 @@ namespace Bot
                            },
                            new KeyboardButton[]
                            {
-                             new KeyboardButton("половое образование")
+                             new KeyboardButton("половое образование"),
+                          
+
                            },
                            new KeyboardButton[]
                            {
@@ -222,7 +247,7 @@ namespace Bot
 
 
                         });
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "vtdtyfuiop",
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                        replyMarkup: sex);
                         break;
 
@@ -234,12 +259,16 @@ namespace Bot
                             {
                                 new KeyboardButton("виды отношений"),
                                 new KeyboardButton("душевное состояние"),
-                                new KeyboardButton("Назад")
 
-                            }
+                                new KeyboardButton("Назад")
+                             }   
+                        
+                        
+                                
+                          
 
                         });
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "fhngmv",
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                       replyMarkup: abuse);
                         break;
 
@@ -338,6 +367,47 @@ namespace Bot
                 }
 
             }
+                       
+
+            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message) 
+            {
+                var message = update.Message;
+                var callbackData = update.CallbackQuery;
+
+                switch (message.Text) 
+                {
+                    case "Психолог":                   
+                        await botClient.ForwardMessageAsync(5757636931, update.Message.Chat.Id, 
+                            update.Message.MessageId);
+                        break;
+                        case "Терапевт":
+                        await botClient.ForwardMessageAsync(1052213789, update.Message.Chat.Id, update.Message.MessageId);
+
+                        break;
+
+
+                    case "Адвокат":
+                        await botClient.ForwardMessageAsync(530783154, update.Message.Chat.Id, update.Message.MessageId);
+
+                        break;
+
+                    case "Гинеколог":
+                        await botClient.ForwardMessageAsync(1020296599, update.Message.Chat.Id, update.Message.MessageId);
+
+                        break;
+
+                    case "Юрист":
+                        await botClient.ForwardMessageAsync(1358080376, update.Message.Chat.Id, update.Message.MessageId);
+
+                        break;
+
+                    case "Шелтер":
+                        await botClient.ForwardMessageAsync(1095898322, update.Message.Chat.Id, update.Message.MessageId);
+
+                        break;
+                }
+            }
+
 
             if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
@@ -360,25 +430,19 @@ namespace Bot
                                                new KeyboardButton("Секс"),
                                                new KeyboardButton("Как распознать арбузера?")
                                            }
-                          }
-                            );
+                          });
 
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "fhngmv",
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "дисклеймер",
                       replyMarkup: mainMenu);
                         break;
                     default:
 
                         break;
 
-                       
+
                 }
 
             }
-
-
-
-
-
 
 
         }
