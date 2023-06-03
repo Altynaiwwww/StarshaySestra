@@ -107,14 +107,28 @@ namespace Bot
                                            new[]
                                            {
                                               new KeyboardButton("SOS"),
-                                              new KeyboardButton("Отношения с родителями "),
-                                              new KeyboardButton("Соц.сети и массовое информация ")
+                                             
+                                              
                                            },
                                            new[]
                                            {
                                                new KeyboardButton("Секс"),
-                                               new KeyboardButton("Как распознать арбузера?")
+                                           },
+                                           new[]
+                                           {
+                                            new KeyboardButton("Как распознать арбузера?")
+                                           },
+                                           new[]
+                                           {
+                                           new KeyboardButton("Соц.сети и массовое информация ")
+                                           },
+                                           new[]
+                                           {
+                                            new KeyboardButton("Отношения с родителями "),
                                            }
+
+
+
                             }
                               );
 
@@ -188,15 +202,16 @@ namespace Bot
                             new KeyboardButton[]
                             {
                              new KeyboardButton("как сепарироватся"),
-                        
-
                             },
                             new KeyboardButton[]
                             {
                              new KeyboardButton("родители и развод"),
-                             new KeyboardButton("Назад")
-
+                            },
+                            new KeyboardButton[]
+                            {
+                            new KeyboardButton("Назад")
                             }
+
 
                         });
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
@@ -209,16 +224,17 @@ namespace Bot
                         {
                             new KeyboardButton[]
                             {
-                             new KeyboardButton("цифровая гигиена"),
-                         
-
+                              new KeyboardButton("цифровая гигиена"),
                             },
                             new KeyboardButton []
                             {
                               new KeyboardButton("инста как фильтр"),
+                            },
+                            new KeyboardButton []
+                            {
                               new KeyboardButton("Назад")
-
                             }
+
                         });
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                          replyMarkup: socials);
@@ -235,14 +251,14 @@ namespace Bot
                            new KeyboardButton[]
                            {
                              new KeyboardButton("половое образование"),
-                          
-
                            },
                            new KeyboardButton[]
                            {
                              new KeyboardButton("месячные"),
+                           },
+                           new KeyboardButton[]
+                           {
                              new KeyboardButton("Назад")
-
                            }
 
 
@@ -258,15 +274,15 @@ namespace Bot
                             new KeyboardButton[]
                             {
                                 new KeyboardButton("виды отношений"),
-                                new KeyboardButton("душевное состояние"),
-
-                                new KeyboardButton("Назад")
-                             }   
-                        
-                        
-                                
-                          
-
+                            },
+                            new KeyboardButton[]
+                            {
+                             new KeyboardButton("душевное состояние"),
+                            },
+                            new KeyboardButton[]
+                            {
+                            new KeyboardButton("Назад")
+                            }
                         });
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
                       replyMarkup: abuse);
