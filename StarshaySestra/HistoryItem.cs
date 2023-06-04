@@ -1,5 +1,8 @@
 ﻿
+using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
+using Telegram.Bots.Http;
 using Update = Telegram.Bot.Types.Update;
 
 namespace StarshaySestra
@@ -38,26 +41,32 @@ namespace StarshaySestra
                     var message = update.Message;
                     var callbackData = update.CallbackQuery;
 
-                    //switch (message.А)
-                    //{
-                    //    case "Назад":
-                    //        userActions.RemoveAt(userActions.Count - 1);
-
-
-                    //        break;
-                    //}
+                    switch (message.Text)
+                    {
+                        case "Назад":
+                            userActions.RemoveAt(userActions.Count - 1);
+                            break;
+                    }
                 }
 
                 
             }
         }
 
-        internal void Add(HistoryItem histories)
+       
+
+        public void SOSButton(ITelegramBotClient botClient, Update update, List<HistoryItem> histories)
+        {
+            //botClient.SendTextMessageAsync(chatId: update.Message.Chat.Id, text: "SOS");
+            //userActions = "SOS";
+
+        }
+        public  void Add(HistoryItem histories)
         {
             throw new NotImplementedException();
         }
 
-      
+
 
     }
 }

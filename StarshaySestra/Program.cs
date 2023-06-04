@@ -12,12 +12,16 @@ using Telegram.Bot.Types.ReplyMarkups;
 using InlineKeyboardMarkup = Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Telegram.Bots.Requests;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using InputFile = Telegram.Bots.Types.InputFile;
+using NuGet.Protocol.Plugins;
+using Telegram.Bot.Exceptions;
 
 namespace Bot
 {
     public class Program
     {
-        static TelegramBotClient botClient = new TelegramBotClient("6239769324:AAE8BbkP2v0d4dyNbx45UEkvBOuBmNdSs7g");
+        static TelegramBotClient botClient = new TelegramBotClient("6001135410:AAEAAbRYcmfvDkL82xT7BIeuOuvwamhF3N4");
 
 
         private enum BotState
@@ -61,7 +65,7 @@ namespace Bot
         {
             if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
-                var message = update.Message;
+                    var message = update.Message;
                 var user = update.ToString();
                 if (message.Text.ToLower() == "/start")
                 {
@@ -82,20 +86,10 @@ namespace Bot
             }
 
 
-            //if (update.Type == Telegram.Bot.Types.Enums.UpdateType.MessageEventArgs xuyna) 
-            //{
-            //    await botClient.DeleteMessageAsync(
-            //            chatId: e.Message.Chat.Id,
-            //            messageId: e.Message.MessageId);
-            //}
 
             static async Task HandleCallbackQuery(Update update, TelegramBotClient botClient)
             {
                 var callbackQuery1 = update.CallbackQuery;
-
-
-
-
 
 
                 switch (callbackQuery1.Data)
@@ -107,8 +101,6 @@ namespace Bot
                                            new[]
                                            {
                                               new KeyboardButton("SOS"),
-                                             
-                                              
                                            },
                                            new[]
                                            {
@@ -134,7 +126,7 @@ namespace Bot
 
                         await botClient.SendTextMessageAsync(
                       chatId: callbackQuery1.Message.Chat.Id,
-                      text: "Выберите тему",
+                      text: "Выберите то что  вас интересует ",
                       replyMarkup: mainMenu,
                       parseMode: Telegram.Bot.Types.Enums.ParseMode.Html
                       );
@@ -185,13 +177,17 @@ namespace Bot
                           },
                           new KeyboardButton[]
                           {
-                             new KeyboardButton("Назад")
+                            new KeyboardButton("Телефон доверия:")
+                          },
+                          new KeyboardButton[]
+                          {
+                            new KeyboardButton("Назад")
                           }
 
 
                         });
 
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ободряющая поддержка",
+                          await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text:"ghjredgfhhjk",
                             replyMarkup: SOS);
                         break;
 
@@ -273,7 +269,7 @@ namespace Bot
                         {
                             new KeyboardButton[]
                             {
-                                new KeyboardButton("виды отношений"),
+                            new KeyboardButton("виды отношений"),
                             },
                             new KeyboardButton[]
                             {
@@ -309,6 +305,7 @@ namespace Bot
                             "которое отражается в изменении образа Я, развитии осознания себя как отдельного уникального индивида, отличного от интериоризованных образов родителей, изменении образов родителей в направлении их реалистичности. " +
                             "Сепарация от родителей закладывает основы для гармоничных отношений с семьей, партнёром и собственными детьми.");
                         break;
+
 
                     case "родители и развод":
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "Развод давно стал привычным явлением в нашей жизни. При этом на жизнь конкретной семьи и особенно детей развод оказывает большое влияние. " +
@@ -402,11 +399,6 @@ namespace Bot
                         break;
 
 
-                    case "Адвокат":
-                        await botClient.ForwardMessageAsync(530783154, update.Message.Chat.Id, update.Message.MessageId);
-
-                        break;
-
                     case "Гинеколог":
                         await botClient.ForwardMessageAsync(1020296599, update.Message.Chat.Id, update.Message.MessageId);
 
@@ -438,13 +430,22 @@ namespace Bot
                                            new[]
                                            {
                                               new KeyboardButton("SOS"),
-                                              new KeyboardButton("Отношения с родителями "),
-                                              new KeyboardButton("Соц.сети и массовое информация ")
                                            },
                                            new[]
                                            {
                                                new KeyboardButton("Секс"),
-                                               new KeyboardButton("Как распознать арбузера?")
+                                           },
+                                           new[]
+                                           {
+                                            new KeyboardButton("Как распознать арбузера?")
+                                           },
+                                           new[]
+                                           {
+                                           new KeyboardButton("Соц.сети и массовое информация ")
+                                           },
+                                           new[]
+                                           {
+                                            new KeyboardButton("Отношения с родителями "),
                                            }
                           });
 
@@ -460,6 +461,20 @@ namespace Bot
 
             }
 
+
+
+            //if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
+            //{
+            //    var message = update.Message;
+            //    var text = update.Message;
+            //    var sticker = "CAACAgIAAxkBAAEJMktkewepV5oxyFe7wd2peP4yyuAAATgAAhYAA4w3Iy5cVcsSS1-ISi8E";
+
+               
+
+            //    await botClient.SendStickerAsync(
+            //        chatId: message.Chat.Id,
+            //        sticker: Telegram.Bot.Types.InputFile.sticker);
+            //}
 
         }
     }
