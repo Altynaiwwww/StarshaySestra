@@ -56,7 +56,7 @@ namespace Bot
 
 
 
-        
+
 
 
 
@@ -65,7 +65,7 @@ namespace Bot
         {
             if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
-                    var message = update.Message;
+                var message = update.Message;
                 var user = update.ToString();
                 if (message.Text.ToLower() == "/start")
                 {
@@ -73,8 +73,7 @@ namespace Bot
                     InlineKeyboardMarkup keyboardMarkupStart = new InlineKeyboardMarkup
                         (InlineKeyboardButton.WithCallbackData(text: "Согласие", callbackData: "soglasen"));
 
-                    await botClient.SendTextMessageAsync(update.Message.Chat.Id, "Дисклеймер, данный бот разработан любящими сестрами для своих сестренок," +
-                        " ввиде не принужденного разговора о этапах взросление и понятий своего тела ",
+                    await botClient.SendTextMessageAsync(update.Message.Chat.Id, "Данный бот данный бот с целью помочь вам в вашем запросе.\r\nОднако, пожалуйста, имейте в виду, что это - всего лишь программное обеспечение,\r\nи не может гарантировать 100% точность или полноту ответов на \r\nваши вопросы. Мы извиняемся за любые ошибки или упущения в информации, \r\nпредоставленной этим ботом.",
                         replyMarkup: keyboardMarkupStart, cancellationToken: cancellationToken);
 
                 }
@@ -187,8 +186,8 @@ namespace Bot
 
                         });
 
-                          await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text:"ghjredgfhhjk",
-                            replyMarkup: SOS);
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: "ghjredgfhhjk",
+                          replyMarkup: SOS);
                         break;
 
 
@@ -284,7 +283,7 @@ namespace Bot
                       replyMarkup: abuse);
                         break;
 
-                   
+
                 }
 
             }
@@ -380,20 +379,20 @@ namespace Bot
                 }
 
             }
-                       
 
-            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message) 
+
+            if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
             {
                 var message = update.Message;
                 var callbackData = update.CallbackQuery;
 
-                switch (message.Text) 
+                switch (message.Text)
                 {
-                    case "Психолог":                   
-                        await botClient.ForwardMessageAsync(5757636931, update.Message.Chat.Id, 
+                    case "Психолог":
+                        await botClient.ForwardMessageAsync(5757636931, update.Message.Chat.Id,
                             update.Message.MessageId);
                         break;
-                        case "Терапевт":
+                    case "Терапевт":
                         await botClient.ForwardMessageAsync(1052213789, update.Message.Chat.Id, update.Message.MessageId);
 
                         break;
@@ -469,7 +468,7 @@ namespace Bot
             //    var text = update.Message;
             //    var sticker = "CAACAgIAAxkBAAEJMktkewepV5oxyFe7wd2peP4yyuAAATgAAhYAA4w3Iy5cVcsSS1-ISi8E";
 
-               
+
 
             //    await botClient.SendStickerAsync(
             //        chatId: message.Chat.Id,
@@ -480,7 +479,7 @@ namespace Bot
     }
 }
 
-  
+
 
 
 
