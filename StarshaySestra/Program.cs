@@ -98,7 +98,7 @@ namespace Bot
                 {
 
                     await botClient.SendTextMessageAsync(update.Message.Chat.Id, "📍Наша философия создания бота для сестер основана на поддержке, информации и вдохновении🫂. Мы стремимся предоставить девушкам ресурс, который поможет им навигироваться через сложности взросления, предоставлять информацию и поддержку на различных этапах и аспектах их жизни🫶🏻. Мы верим в силу сестринской солидарности и стремимся создать пространство, где девушки могут общаться, делиться опытом и расти вместе. Наш бот - это электронная брошюра, которая стоит рядом с каждой сестрой, помогая ей стать сильной, уверенной и успешной женщиной❤️.");
-                    Thread.Sleep(10000);
+                    
 
 
                     InlineKeyboardMarkup keyboardMarkupStart = new InlineKeyboardMarkup
@@ -138,7 +138,7 @@ namespace Bot
                         break;
 
 
-                    case "Соц.сети и массовое информация":
+                    case "Соц.сети и массовые информации":
                         await ButtonResponses.ShowInstagramResponse(botClient, message.Chat.Id);
                         break;
 
@@ -172,7 +172,7 @@ namespace Bot
 
                         Thread.Sleep(5000);
 
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: ResponseToUser.ComplexRelationship1);
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: ResponseToUser.ComplexParents);
 
                         break;
 
@@ -198,19 +198,19 @@ namespace Bot
 
                     case "Половое образование":
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text:ResponseToUser.SexEducation );
-                        Thread.Sleep(10000);
+                        
 
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: ResponseToUser.SexEducation1);
-                        Thread.Sleep(10000);
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: ResponseToUser.SexEdu);
+                        
 
-                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: ResponseToUser.SexEducation2);
+                        await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text: ResponseToUser.SexEd);
 
 
                         break;
 
                     case "Месячные":
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text:ResponseToUser.Period );
-                        Thread.Sleep(5000);
+                        
 
                         await botClient.SendTextMessageAsync(chatId: message.Chat.Id, text:ResponseToUser.Period1 );
                         break;
